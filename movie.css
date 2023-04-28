@@ -226,7 +226,7 @@ body {
     padding: 20px;
     border-bottom: 1px solid rgb(99, 98, 98);
 }
-
+cast
 #languages b, 
 #director b, 
 #writers b, 
@@ -456,6 +456,7 @@ ol, li {
 #cast {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .heading {
@@ -732,3 +733,113 @@ ol, li {
     background-color: rgb(134, 77, 77);
 }
 
+
+
+
+
+@media only screen and (max-width: 1260px) {
+    #content {
+        margin: 0px 10px;
+        padding: 0px 30px;
+    }
+
+    #visuals {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    #poster {
+        display: none;
+    }
+
+    #video {
+        height: 500px;
+        width: auto;
+    }
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    #content {
+        margin: 0px 10px;
+        padding: 0px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #visuals {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 0px;
+        justify-content: space-between;
+        background-color: black;
+    }
+
+    #poster {
+        display: block;
+        height: 300px;
+        width: 200px;
+    }
+
+    #video {
+        height: 300px;
+        width: auto;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 650px) {
+    .review-card {
+        width: 500px;
+    }
+
+    .long-cont {
+        width: 495px;
+        padding: 8px;
+        font-size: 16px;
+    }
+
+    .input-conts input,
+    .input-conts textarea {
+        width: 480px;
+        margin: 10px;
+    }
+
+    #submit {
+        width: 480px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #content {
+        margin: 0px 0px;
+        padding: 0px 10px;
+    }
+
+    .review-card {
+        width: 315px;
+    }
+
+    .long-cont {
+        width: 310px;
+        padding: 8px;
+        font-size: 16px;
+    }
+
+    .input-conts input,
+    .input-conts textarea {
+        width: 300px;
+        margin: 10px;
+    }
+
+    #submit {
+        width: 300px;
+    }
+}
