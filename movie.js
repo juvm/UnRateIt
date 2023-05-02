@@ -1,4 +1,4 @@
-const APILINK = 'https://unrates.azurewebsites.net/api/v1/reviews/';
+const APILINK = 'http://20.192.170.9:80/api/v1/reviews/';
 //Here, instead of using themoviedb api, we're using the api that we made for the backend
 
 const url = new URL(location.href);   //URL object to extract parameters
