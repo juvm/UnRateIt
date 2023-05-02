@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';  //cross-origin resource sharing
-import reviews from './backend/api/reviews.route.js';
+import reviews from './api/reviews.route.js';
 
 const app = express();
 app.use(cors());
