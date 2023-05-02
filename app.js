@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 
-import app from '.backend/server.js'
+import app from './backend/server.js'
 import mongodb from 'mongodb'
 import ReviewsDAO from './backend/dao/reviewsDAO.js'
 //DAO stands for data access object
