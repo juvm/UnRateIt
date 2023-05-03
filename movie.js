@@ -1,4 +1,4 @@
-const APILINK = 'http://localhost:80/api/v1/reviews/';
+const APILINK = 'http://127.0.0.1:8080/api/v1/reviews/';
 //Here, instead of using themoviedb api, we're using the api that we made for the backend
 
 const url = new URL(location.href);   //URL object to extract parameters
@@ -348,7 +348,7 @@ function editReview(id, rating, headline, review, user) {
 
     element.innerHTML = `
     <p><strong>Rating: </strong>
-        <input type='text' id='${ratingInputId}' value='${rating}'>
+        <input type='text' id='${ratingInputId}' value=''>
     </p>
     <p><strong>Headline: </strong>
         <input type='text' id='${headlineInputId}' value='${headline}'>
