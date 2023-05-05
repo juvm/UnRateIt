@@ -16,12 +16,27 @@ export default class ReviewsController {
             const review = req.body.review;
             const review_time = req.body.review_time;
 
-            //Added code fragment and changed "const rating = req.body.rating;" to "let rating;"
-            if(req.body.rating === "" || req.body.rating == 0) {
-                rating = await AzureHelper.sentimentMining([review]); //Sending an array of strings as that is the value the Azure functions take
-                console.log(rating);
+            //Azure code fragments to save translated reviews in case of non-English reviews
+            let language = await AzureHelper.languageDetection([req.body.review]);
+            console.log(language);
+            let translatedReview = "";
+            
+            if(language != "en") {
+                translatedReview = await AzureHelper.translatesReviews(language, req.body.review);
+                console.log(translatedReview);
+                if(req.body.rating === "" || req.body.rating == 0) { 
+                    rating = await AzureHelper.sentimentMining([translatedReview]); 
+                    //Sending an array of strings as that is the value the Azure functions take
+                }
+            }
+            else {
+                if(req.body.rating === "" || req.body.rating == 0) { 
+                    rating = await AzureHelper.sentimentMining([review]); 
+                }
+            } 
+            console.log(rating);
 
-            } else { 
+            if(!(req.body.rating === "" || req.body.rating == 0)) { 
                 rating = req.body.rating; //add below code to front-end checking
                 if(rating > 10)
                     while (rating > 10) 
@@ -30,19 +45,7 @@ export default class ReviewsController {
                     while (rating < 1) 
                         rating *= 10;
             }
-            const roundedRating = Math.round(rating * 10) / 10;
-            //End of addition 1
-
-            //Azure code fragment to save translated reviews in case of non-English reviews
-            let language = await AzureHelper.languageDetection([req.body.review]);
-            console.log(language);
-            let translatedReview = "";
-            
-            if(language != "en") {     
-                translatedReview = await AzureHelper.translatesReviews(language, req.body.review);
-                console.log(translatedReview);
-            }
-            //End of addition 2 
+            const roundedRating = (Math.round(rating * 10)) / 10;
             
             const reviewResponse = await ReviewsDAO.addReview(
                 movieId,

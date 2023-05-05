@@ -8,6 +8,8 @@ const movieTitle = url.searchParams.get('title');
 const movieAPILINK = `https://api.themoviedb.org/3/movie/${movieId}?api_key=9e7fa9ff865d1ce0fdce40e41b3a9dff&language=en-US`;
 
 const main = document.getElementById('section');
+const existing = document.createElement('div');
+existing.setAttribute('class', 'order_by_time');
 
 fetch(movieAPILINK)
 .then(res => res.json())
@@ -250,18 +252,21 @@ div_new.innerHTML = `
             <div class='review-card'>
                 <div class="input-conts">
                     <span class="long-cont">YOUR RATING</span> 
-                    <span class="filler-text">Can't express your feelings in numbers? Leave it to AI!</span> 
+                    <span class="filler-text" id="error-text">Can't express your feelings in numbers? Leave it to AI!</span> 
                     <input type='text' id='new_rating' value='' placeholder="1-10">
                 </div>
+                <form>
                 <div class="input-conts">
                     <span class="long-cont">YOUR REVIEW</span>
-                    <input type='text' id='new_headline' value='' placeholder="Write a headline for your review here">
-                    <textarea id='new_review' value='' placeholder="Write your review here - in any language" rows="10"></textarea>
+                    <input type='text' id='new_headline' value='' placeholder="Write a headline for your review here" required/>
+                    <textarea id='new_review' value='' placeholder="Write your review here - in any language" rows="10" required></textarea>
                 </div>
                 <div class="input-conts">
                     <span class="long-cont">Username</span>
-                    <input type='text' id='new_user' value='' placeholder="Username">
+                    <form>
+                    <input type='text' id='new_user' value='' placeholder="Username" required>
                 </div>
+                </form>
                 <div><button id="submit" onclick='saveReview("new_rating", "new_headline", "new_review", "new_user")'>Submit</button></div>
             </div>
         </div>
@@ -269,6 +274,7 @@ div_new.innerHTML = `
 main.appendChild(div_new);
 //Because we're not using any variables in the div_new innerHTML, it means that it was okay for us to write that HTML in the movie.html file also
 //But for simplicity and ease of understanding, we wrote it out here
+main.appendChild(existing);
 
 returnReviews(APILINK);
 
@@ -332,7 +338,7 @@ function returnReviews(url) {
             </div>`;
 
             div_card.innerHTML = review_data;
-            main.appendChild(div_card);
+            existing.appendChild(div_card);
         });
     });
 }
@@ -372,7 +378,10 @@ function saveReview(ratingInputId, headlineInputId, reviewInputId, userInputId, 
     const review = document.getElementById(reviewInputId).value;
     const user = document.getElementById(userInputId).value;
 
+    const filler_text = document.getElementById('error-text');
+    const bool = headline && review;
     //if id is not an empty string => if editReview called the save Review function
+    if(bool && user){
     if (id) {
         //fetch() is a js method that allows us to send an http request to a url and get response back
         //By default it makes use of the GET method, though you can explicitly specify what method you intend to use as shown below
@@ -401,7 +410,7 @@ function saveReview(ratingInputId, headlineInputId, reviewInputId, userInputId, 
             console.log(res);
             location.reload();
         });
-    } 
+    } }
 }
 
 function deleteReview(id) {
