@@ -255,18 +255,16 @@ div_new.innerHTML = `
                     <span class="filler-text" id="error-text">Can't express your feelings in numbers? Leave it to AI!</span> 
                     <input type='text' id='new_rating' value='' placeholder="1-10">
                 </div>
-                <form>
                 <div class="input-conts">
                     <span class="long-cont">YOUR REVIEW</span>
-                    <input type='text' id='new_headline' value='' placeholder="Write a headline for your review here" required/>
-                    <textarea id='new_review' value='' placeholder="Write your review here - in any language" rows="10" required></textarea>
+                    <input type='text' id='new_headline' value='' placeholder="Write a headline for your review here"/>
+                    <textarea id='new_review' value='' placeholder="Write your review here - in any language" rows="10"></textarea>
                 </div>
                 <div class="input-conts">
                     <span class="long-cont">Username</span>
                     <form>
-                    <input type='text' id='new_user' value='' placeholder="Username" required>
+                    <input type='text' id='new_user' value='' placeholder="Username">
                 </div>
-                </form>
                 <div><button id="submit" onclick='saveReview("new_rating", "new_headline", "new_review", "new_user")'>Submit</button></div>
             </div>
         </div>
@@ -379,9 +377,7 @@ function saveReview(ratingInputId, headlineInputId, reviewInputId, userInputId, 
     const user = document.getElementById(userInputId).value;
 
     const filler_text = document.getElementById('error-text');
-    const bool = headline && review;
     //if id is not an empty string => if editReview called the save Review function
-    if(bool && user){
     if (id) {
         //fetch() is a js method that allows us to send an http request to a url and get response back
         //By default it makes use of the GET method, though you can explicitly specify what method you intend to use as shown below
@@ -410,7 +406,7 @@ function saveReview(ratingInputId, headlineInputId, reviewInputId, userInputId, 
             console.log(res);
             location.reload();
         });
-    } }
+    } 
 }
 
 function deleteReview(id) {
